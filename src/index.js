@@ -1,3 +1,10 @@
-console.log('123')
+// login 01
+// let name = require('./login.js')
 
-module.exports = '导出内容'
+// console.log('index执行了')
+// console.log(name)
+
+let obj = require('./login.js')
+
+console.log('index执行了')
+console.log(obj.default, '--->', obj.age)

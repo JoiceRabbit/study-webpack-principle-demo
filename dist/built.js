@@ -1,11 +1,10 @@
  (function(modules) { // webpackBootstrap
-   // The module cache
-  //  缓存已加载的模块 moduleId: module
+ 	// The module cache
  	var installedModules = {};
 
-   // The require function
-  //  webpack自定义的模块加载方法，核心功能是返回模块中导出的内容
+ 	// The require function
  	function __webpack_require__(moduleId) {
+
  		// Check if module is in cache
  		if(installedModules[moduleId]) {
  			return installedModules[moduleId].exports;
@@ -16,9 +15,8 @@
  			l: false,
  			exports: {}
  		};
-     // Execute the module function
-    //  执行模块对应的函数，相当于引入模块的内容
-    // 1. 改变this指向module.exports，传入参数module对象，module.exports, __webpack_require__模块引入的方法（方便加载当前模块里导入的其他模块）
+
+ 		// Execute the module function
  		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
  		// Flag the module as loaded
@@ -28,28 +26,23 @@
  		return module.exports;
  	}
 
-   // expose the modules object (__webpack_modules__)
-  //  保存一份modules
+
+ 	// expose the modules object (__webpack_modules__)
  	__webpack_require__.m = modules;
 
-   // expose the module cache
-  //  保存一份已加载模块
+ 	// expose the module cache
  	__webpack_require__.c = installedModules;
 
  	// define getter function for harmony exports
  	__webpack_require__.d = function(exports, name, getter) {
-    //  __webpack_require__.o 判断对象exports是否有属性name
  		if(!__webpack_require__.o(exports, name)) {
  			Object.defineProperty(exports, name, { enumerable: true, get: getter });
  		}
  	};
 
-   // define __esModule on exports
-  //  标记模块是否是esModule
+ 	// define __esModule on exports
  	__webpack_require__.r = function(exports) {
-    //  下面条件成立说明是一个esModule
  		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-      //  Object.prototype.toString.call(exports) === 'Module'
  			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
  		}
  		Object.defineProperty(exports, '__esModule', { value: true });
@@ -70,36 +63,60 @@
  		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
  		return ns;
  	};
+
  	// getDefaultExport function for compatibility with non-harmony modules
  	__webpack_require__.n = function(module) {
  		var getter = module && module.__esModule ?
  			function getDefault() { return module['default']; } :
-       function getModuleExports() { return module; };
-      //  为getter添加a属性，a属性的值通过getter获取，getter调用时会判断是否是esModule，返回不同的值
-      // 说明通过a属性可以拿到module的默认导致值
+ 			function getModuleExports() { return module; };
  		__webpack_require__.d(getter, 'a', getter);
  		return getter;
  	};
 
  	// Object.prototype.hasOwnProperty.call
  	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+
  	// __webpack_public_path__
  	__webpack_require__.p = "";
-   // Load entry module and return exports
-  //  __webpack_require__.s 入口模块的id
+
+
+ 	// Load entry module and return exports
  	return __webpack_require__(__webpack_require__.s = "./src/index.js");
  })
 /************************************************************************/
  ({
-    "./src/index.js":
-    /*!**********************!*\
-      !*** ./src/index.js ***!
-      \**********************/
-    /*! no static exports found */
-    (function(module, exports) {
-      console.log('123')
-      module.exports = '导出内容'
-    })
- });
 
-//  自执行函数，接收一个对象参数，键值对为模块id和包裹模块内容的函数
+  "./src/index.js":
+  /*! no static exports found */
+  (function(module, exports, __webpack_require__) {
+
+  // login 01
+  // let name = require('./login.js')
+
+  // console.log('index执行了')
+  // console.log(name)
+
+  let obj = __webpack_require__(/*! ./login.js */ "./src/login.js")
+
+  console.log('index执行了')
+  console.log(obj.default, '--->', obj.age)
+
+  }),
+
+  "./src/login.js":
+  /*! exports provided: default, age */
+  (function(module, __webpack_exports__, __webpack_require__) {
+
+  "use strict";
+  __webpack_require__.r(__webpack_exports__);
+  /* harmony export (binding) */
+  __webpack_require__.d(__webpack_exports__, "age", function() { return age; });
+  // 01 采用cms
+  // webpack对cms导出的模块没有做任何处理
+  // module.exports = 'login'
+
+  // 02 采用esm
+  /* harmony default export */ __webpack_exports__["default"] = ('lq');
+  const age = 23423
+  })
+ });
