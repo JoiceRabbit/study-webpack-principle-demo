@@ -66,10 +66,11 @@
 
  	// getDefaultExport function for compatibility with non-harmony modules
  	__webpack_require__.n = function(module) {
+    //  返回获取模板默认导出值的getter，esm的默认值是模块exports上的default属性，csm的默认值是整个模块，即module.exports
  		var getter = module && module.__esModule ?
  			function getDefault() { return module['default']; } :
  			function getModuleExports() { return module; };
- 		__webpack_require__.d(getter, 'a', getter);
+ 		__webpack_require__.d(getter, 'a', getter); // getter上的a属性是模块导出的默认值
  		return getter;
  	};
 
@@ -86,37 +87,43 @@
 /************************************************************************/
  ({
 
-  "./src/index.js":
-  /*! no static exports found */
-  (function(module, exports, __webpack_require__) {
+    "./src/index.js":
+    /*! no exports provided */
+    (function(module, __webpack_exports__, __webpack_require__) {
 
-  // login 01
-  // let name = require('./login.js')
+    "use strict";
+    // 标记esmodule
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony import */ 
+    var _login_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login.js */ "./src/login.js");
+    /* harmony import */
+    var _login_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_login_js__WEBPACK_IMPORTED_MODULE_0__);
+    // login 01
 
-  // console.log('index执行了')
-  // console.log(name)
 
-  let obj = __webpack_require__(/*! ./login.js */ "./src/login.js")
+    console.log('index执行了')
+    console.log(_login_js__WEBPACK_IMPORTED_MODULE_0___default.a)
 
-  console.log('index执行了')
-  console.log(obj.default, '--->', obj.age)
+    // let obj = require('./login.js')
 
-  }),
+    // console.log('index执行了')
+    // console.log(obj.default, '--->', obj.age)
 
-  "./src/login.js":
-  /*! exports provided: default, age */
-  (function(module, __webpack_exports__, __webpack_require__) {
+    }),
 
-  "use strict";
-  __webpack_require__.r(__webpack_exports__);
-  /* harmony export (binding) */
-  __webpack_require__.d(__webpack_exports__, "age", function() { return age; });
-  // 01 采用cms
-  // webpack对cms导出的模块没有做任何处理
-  // module.exports = 'login'
+    "./src/login.js":
+    /*!**********************!*\
+      !*** ./src/login.js ***!
+      \**********************/
+    /*! no static exports found */
+    (function(module, exports) {
 
-  // 02 采用esm
-  /* harmony default export */ __webpack_exports__["default"] = ('lq');
-  const age = 23423
-  })
+    // 01 采用cms
+    // webpack对cms导出的模块没有做任何处理
+    module.exports = 'login'
+
+    // 02 采用esm
+    // export default 'lq'
+    // export const age = 23423
+    })
  });
