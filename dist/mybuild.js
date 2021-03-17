@@ -18,7 +18,7 @@
 
       for(moduleId in moreModules) {
         if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
-          // why 在modules上保存一份
+          // 在modules上保存一份,方便t方法中执行__webpack_require__
           modules[moduleId] = moreModules[moduleId];
         }
       }
